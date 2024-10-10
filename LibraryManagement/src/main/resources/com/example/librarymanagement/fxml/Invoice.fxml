@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement.controllers.InvoiceController">
+   <stylesheets>
+      <URL value="@css/style.css" />
+   </stylesheets>
+   <children>
+      <TableView fx:id="invoiceTable" layoutX="32.0" layoutY="122.0" prefHeight="520.0" prefWidth="759.0">
+         <columns>
+            <TableColumn fx:id="idColumn" text="ID" visible="false">
+               <cellValueFactory>
+                  <PropertyValueFactory property="id" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="invoiceCodeColumn" prefWidth="97.60000228881836" text="Invoice Code" />
+            <TableColumn fx:id="realatedCodeColumn" minWidth="0.0" prefWidth="96.00003051757812" text="Related Code" />
+            <TableColumn fx:id="relatedNameColumn" prefWidth="153.59999084472656" text="Related Name" />
+            <TableColumn fx:id="paymentTypeColumn" prefWidth="94.4000244140625" text="Payment Type" />
+            <TableColumn fx:id="amountColumn" prefWidth="72.0" text="Amount" />
+            <TableColumn fx:id="paymentDateColumn" prefWidth="147.199951171875" text="Payment Date" />
+            <TableColumn fx:id="statusColumn" prefWidth="95.9999877929688" text="Status" />
+         </columns>
+      </TableView>
+      <Label layoutX="32.0" layoutY="32.0" prefHeight="30.0" prefWidth="98.0" text="Invoices" textFill="#2499ff">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="searchField" layoutX="32.0" layoutY="77.0" prefHeight="35.0" prefWidth="250.0" promptText="Search" style="-fx-padding: 0 0 0 34; -fx-border-width: 1px; -fx-border-color: gray; -fx-border-radius: 5px;">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Button alignment="CENTER" layoutX="296.0" layoutY="77.0" mnemonicParsing="false" onAction="#handleExportInvoices" prefHeight="35.0" prefWidth="50.0" styleClass="buttonBlue" stylesheets="@css/style.css">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="UPLOAD" size="20px" text="" />
+         </graphic>
+      </Button>
+      <FontAwesomeIcon fill="#2499ff" glyphName="SEARCH" layoutX="40.0" layoutY="101.0" size="20px" />
+      <Pane layoutX="823.0" layoutY="122.0" prefHeight="520.0" prefWidth="262.0" style="-fx-border-color: gray; -fx-border-radius: 5px;">
+         <children>
+            <Label alignment="CENTER" layoutX="77.0" layoutY="-1.0" prefHeight="30.0" prefWidth="109.0" text="Payment" textFill="#2499ff">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" layoutX="66.0" layoutY="468.0" mnemonicParsing="false" onAction="#handlePayAction" prefHeight="35.0" prefWidth="131.0" styleClass="buttonBlue" text="Pay">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="MONEY" size="15" />
+               </graphic>
+            </Button>
+            <TextField fx:id="idField" managed="false" visible="false" />
+            <ImageView fx:id="QRCode" fitHeight="200.0" fitWidth="200.0" layoutX="32.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/QR.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="45.0" layoutY="38.0" text="Invoice Code :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="invoiceCodeLabel" layoutX="145.0" layoutY="38.0" prefHeight="20.0" prefWidth="87.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="324.0" prefHeight="20.0" prefWidth="217.0" text="Vietcombank">
+               <font>
+                  <Font name="System Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="350.0" prefHeight="20.0" prefWidth="217.0" text="DO VAN TOAN">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="373.0" prefHeight="20.0" prefWidth="217.0" text="0711000313135">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="amountLabel" alignment="CENTER" layoutX="24.0" layoutY="287.0" prefHeight="20.0" prefWidth="217.0" textFill="#09ff00">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <VBox fx:id="notificationBox" layoutX="29.0" layoutY="606.0" prefHeight="42.0" prefWidth="1071.0" style="-fx-padding: 0 10 0 10; -fx-background-radius: 5px; -fx-border-radius: 5px;">
+         <children>
+            <Label fx:id="notificationLabel" alignment="CENTER" prefHeight="42.0" prefWidth="1122.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+
+</AnchorPane>

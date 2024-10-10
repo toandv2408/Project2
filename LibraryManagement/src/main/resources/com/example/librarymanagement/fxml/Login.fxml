@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0,2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement.controllers.LoginController">
+   <stylesheets>
+      <URL value="@css/style.css" /> <!-- Thay đổi đường dẫn nếu cần -->
+   </stylesheets>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #2499FF; -fx-background-radius: 0px 20px 20px 0px;" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="WHITE" layoutX="76.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LIBRARY MANAGEMENT">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <FontAwesomeIcon fill="WHITE" glyphName="BOOK" layoutX="140.0" layoutY="225.0" size="75" />
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="usernameField" layoutX="85.0" layoutY="212.0" prefHeight="30.0" prefWidth="200.0" promptText="Username" style="-fx-border-color: #2499FF; -fx-border-width: 0px 0px 2px 0px; -fx-background-radius: 10px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </TextField>
+            <PasswordField fx:id="passwordField" layoutX="85.0" layoutY="265.0" prefHeight="30.0" prefWidth="200.0" promptText="Password" style="-fx-background-radius: 10px; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #2499FF;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </PasswordField>
+            <Button styleClass="buttonBlue" alignment="CENTER" layoutX="137.0" layoutY="325.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="30.0" prefWidth="74.0" text="LOGIN" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Text fill="#2499ff" layoutX="126.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN LOGIN">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <FontAwesomeIcon fill="#2499ff" glyphName="USERS" layoutX="163.0" layoutY="134.0" size="40" text="" />
+            <FontAwesomeIcon fill="#2499ff" glyphName="USER" layoutX="59.0" layoutY="237.0" size="20" />
+            <FontAwesomeIcon fill="#2499ff" glyphName="KEY" layoutX="57.0" layoutY="290.0" size="20" />
+            <Label fx:id="errorMessage" alignment="CENTER" layoutX="85.0" layoutY="187.0" prefHeight="18.0" prefWidth="202.0" textFill="RED" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

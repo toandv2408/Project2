@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement.controllers.BookController">
+   <stylesheets>
+      <URL value="@css/style.css" /> <!-- Thay đổi đường dẫn nếu cần -->
+   </stylesheets>
+   <TableView fx:id="booksTable" layoutX="22.0" layoutY="112.0" prefHeight="520.0" prefWidth="778.0">
+      <columns>
+         <TableColumn fx:id="idColumn" text="ID" visible="false">
+            <cellValueFactory>
+               <PropertyValueFactory property="id" />
+            </cellValueFactory>
+         </TableColumn>
+         <TableColumn fx:id="bookCodeColumn" prefWidth="65.60000801086426" text="Book Code" />
+         <TableColumn fx:id="titleColumn" minWidth="0.0" prefWidth="244.7999725341797" text="Title" />
+         <TableColumn fx:id="authorColumn" prefWidth="121.60000610351562" text="Author" />
+         <TableColumn fx:id="publishedYearColumn" prefWidth="81.60003662109375" text="Published Year" />
+         <TableColumn fx:id="genreNameColumn" prefWidth="131.199951171875" text="Genre Name" />
+         <TableColumn fx:id="stockColumn" prefWidth="40.79998779296875" text="Stock" />
+         <TableColumn fx:id="priceColumn" prefWidth="91.99993896484375" text="Price" />
+      </columns>
+   </TableView>
+   <Label layoutX="22.0" layoutY="22.0" prefHeight="30.0" prefWidth="68.0" text="Books" textFill="#2499ff">
+      <font>
+         <Font name="System Bold" size="20.0" />
+      </font>
+   </Label>
+   <Pane layoutX="819.0" layoutY="112.0" prefHeight="520.0" prefWidth="275.0" style="-fx-border-color: gray; -fx-border-radius: 5px;">
+      <children>
+         <Button alignment="CENTER" layoutX="84.0" layoutY="466.0" mnemonicParsing="false" onAction="#addBook" prefHeight="30.0" prefWidth="50.0" styleClass="buttonBlue">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+            <graphic>
+               <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="15" />
+            </graphic>
+         </Button>
+         <TextField fx:id="idField" managed="false" visible="false" />
+         <TextField fx:id="titleField" layoutX="13.0" layoutY="76.0" prefHeight="30.0" prefWidth="250.0" promptText="Ex: Book Name" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="authorField" layoutX="14.0" layoutY="138.0" prefHeight="30.0" prefWidth="250.0" promptText="Ex: Nguyen Van A" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="publishedYearField" layoutX="13.0" layoutY="203.0" prefHeight="30.0" prefWidth="250.0" promptText="Ex: 2004" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="genreNameField" layoutX="13.0" layoutY="270.0" prefHeight="30.0" prefWidth="250.0" promptText="Ex: Information Technology" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="stockField" layoutX="14.0" layoutY="335.0" prefHeight="30.0" prefWidth="250.0" promptText="Ex: 10" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="priceField" layoutX="14.0" layoutY="396.0" prefHeight="30.0" prefWidth="250.0" promptText="Ex: 100000" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <Button alignment="CENTER" layoutX="211.0" layoutY="466.0" mnemonicParsing="false" onAction="#deleteBook" prefHeight="30.0" prefWidth="50.0" styleClass="buttonRed">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+            <graphic>
+               <FontAwesomeIcon fill="WHITE" glyphName="TRASH" size="15" />
+            </graphic>
+         </Button>
+         <Button alignment="CENTER" layoutX="18.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="50.0" styleClass="buttonGreen">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+            <graphic>
+               <FontAwesomeIcon fill="WHITE" glyphName="REFRESH" size="15" />
+            </graphic>
+         </Button>
+         <Button alignment="CENTER" layoutX="147.0" layoutY="466.0" mnemonicParsing="false" onAction="#updateBook" prefHeight="30.0" prefWidth="50.0" styleClass="buttonOrange">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+            <graphic>
+               <FontAwesomeIcon fill="WHITE" glyphName="EDIT" size="15" />
+            </graphic>
+         </Button>
+         <Label layoutX="18.0" layoutY="372.0" text="Price :">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <Label layoutX="18.0" layoutY="310.0" text="Stock :">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <Label layoutX="17.0" layoutY="245.0" text="Genre Name :">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <Label layoutX="18.0" layoutY="179.0" text="Published Year :">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <Label layoutX="19.0" layoutY="114.0" text="Author :">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <Label layoutX="20.0" layoutY="51.0" text="Title :">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <Label alignment="CENTER" layoutX="93.0" layoutY="7.0" prefHeight="30.0" prefWidth="109.0" text="Book Form" textFill="#2499ff">
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font>
+         </Label>
+      </children>
+   </Pane>
+   <TextField fx:id="searchField" layoutX="22.0" layoutY="67.0" prefHeight="35.0" prefWidth="250.0" promptText="Search" style="-fx-padding: 0 0 0 34; -fx-border-width: 1px; -fx-border-color: gray; -fx-border-radius: 5px;">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </TextField>
+   <FontAwesomeIcon fill="#2499ff" glyphName="SEARCH" layoutX="30.0" layoutY="91.0" size="20px" />
+   <VBox fx:id="notificationBox" layoutX="28.0" layoutY="606.0" prefHeight="42.0" prefWidth="1072.0" style="-fx-padding: 0 10 0 10; -fx-background-radius: 5px; -fx-border-radius: 5px;">
+      <children>
+         <Label fx:id="notificationLabel" alignment="CENTER" prefHeight="42.0" prefWidth="1096.0">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+      </children>
+   </VBox>
+   <Button alignment="CENTER" layoutX="290.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleImportBooks" prefHeight="35.0" prefWidth="50.0" styleClass="buttonBlue">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+      <graphic>
+         <FontAwesomeIcon fill="WHITE" glyphName="DOWNLOAD" size="15" text="" />
+      </graphic>
+   </Button>
+   <Button alignment="CENTER" layoutX="359.0" layoutY="67.0" mnemonicParsing="false" onAction="#handleExportBooks" prefHeight="35.0" prefWidth="50.0" styleClass="buttonBlue">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+      <graphic>
+         <FontAwesomeIcon fill="WHITE" glyphName="UPLOAD" size="15" text="" />
+      </graphic>
+   </Button>
+</AnchorPane>

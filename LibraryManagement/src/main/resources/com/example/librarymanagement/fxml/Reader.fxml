@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement.controllers.ReaderController">
+   <stylesheets>
+      <URL value="@css/style.css" />
+   </stylesheets>
+   <children>
+      <TableView fx:id="readerTable" layoutX="22.0" layoutY="112.0" prefHeight="520.0" prefWidth="810.0">
+         <columns>
+            <TableColumn fx:id="idColumn" text="ID" visible="false">
+               <cellValueFactory>
+                  <PropertyValueFactory property="id" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="readerCodeColumn" prefWidth="81.60000228881836" text="Reader Code" />
+            <TableColumn fx:id="fullNameColumn" minWidth="0.0" prefWidth="91.20001220703125" text="Full Name" />
+            <TableColumn fx:id="genderColumn" prefWidth="51.199951171875" text="Gender" />
+            <TableColumn fx:id="dobColumn" prefWidth="79.19996643066406" text="Date of Birth" />
+            <TableColumn fx:id="emailColumn" prefWidth="105.60003662109375" text="Email" />
+            <TableColumn fx:id="phoneNumberColumn" prefWidth="98.4000244140625" text="Phone Number" />
+            <TableColumn fx:id="citizenshipCardColumn" prefWidth="109.5999755859375" text="Citizenship Card" />
+            <TableColumn fx:id="addressColumn" prefWidth="107.99993896484375" text="Address" />
+            <TableColumn fx:id="expiryDateColumn" prefWidth="81.60001220703123" text="Expiry Date" />
+         </columns>
+      </TableView>
+      <Label layoutX="22.0" layoutY="22.0" prefHeight="30.0" prefWidth="98.0" text="Readers" textFill="#2499ff">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Pane layoutX="850.0" layoutY="112.0" prefHeight="520.0" prefWidth="245.0" style="-fx-border-color: gray; -fx-border-radius: 5px;">
+         <children>
+            <Button alignment="CENTER" layoutX="74.0" layoutY="477.0" mnemonicParsing="false" onAction="#addReader" prefHeight="30.0" prefWidth="45.0" styleClass="buttonBlue">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="15" />
+               </graphic>
+            </Button>
+            <TextField fx:id="idField" managed="false" visible="false" />
+            <TextField fx:id="fullNameField" layoutX="13.0" layoutY="57.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: Nguyen Van A" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="emailField" layoutX="13.0" layoutY="240.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: example@gmail.com" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="phoneNumberField" layoutX="13.0" layoutY="307.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: 0987654321" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="citizenshipCardField" layoutX="14.0" layoutY="372.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: 001204xxxxxx" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="addressField" layoutX="14.0" layoutY="433.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: Ha Noi" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button alignment="CENTER" layoutX="187.0" layoutY="477.0" mnemonicParsing="false" onAction="#deleteReader" prefHeight="30.0" prefWidth="45.0" styleClass="buttonRed">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="TRASH" size="15" />
+               </graphic>
+            </Button>
+            <Button alignment="CENTER" layoutX="18.0" layoutY="477.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="45.0" styleClass="buttonGreen">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="REFRESH" size="15" />
+               </graphic>
+            </Button>
+            <Button alignment="CENTER" layoutX="131.0" layoutY="477.0" mnemonicParsing="false" onAction="#updateReader" prefHeight="30.0" prefWidth="45.0" styleClass="buttonOrange">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="EDIT" size="15" />
+               </graphic>
+            </Button>
+            <Label layoutX="18.0" layoutY="409.0" text="Address :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="347.0" text="Citizenship Card :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="282.0" text="Phone Number :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="216.0" text="Email :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="19.0" layoutY="153.0" text="Date of Birth :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="32.0" text="Full Name :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="79.0" layoutY="-1.0" prefHeight="30.0" prefWidth="109.0" text="Reader Form" textFill="#2499ff">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="98.0" text="Gender :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="dobField" layoutX="14.0" layoutY="177.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: mm/DD/yyyy" style="-fx-border-width: 1px; -fx-border-radius: 5px; -fx-border-color: gray;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </DatePicker>
+            <HBox layoutX="20.0" layoutY="118.0" prefHeight="30.0" prefWidth="209.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" text="Male">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="genderToggleGroup" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="72.0" text="Female" toggleGroup="$genderToggleGroup" />
+                  <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Other" toggleGroup="$genderToggleGroup">
+                     <padding>
+                        <Insets left="4.0" />
+                     </padding></RadioButton>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <TextField fx:id="searchField" layoutX="22.0" layoutY="67.0" prefHeight="35.0" prefWidth="250.0" promptText="Search" style="-fx-padding: 0 0 0 34; -fx-border-width: 1px; -fx-border-color: gray; -fx-border-radius: 5px;">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <FontAwesomeIcon fill="#2499ff" glyphName="SEARCH" layoutX="30.0" layoutY="91.0" size="20px" />
+      <VBox fx:id="notificationBox" layoutX="29.0" layoutY="606.0" prefHeight="42.0" prefWidth="1071.0" style="-fx-padding: 0 10 0 10; -fx-background-radius: 5px; -fx-border-radius: 5px;">
+         <children>
+            <Label fx:id="notificationLabel" alignment="CENTER" prefHeight="42.0" prefWidth="1122.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Button alignment="CENTER" layoutX="286.0" layoutY="67.0" mnemonicParsing="false" onAction="#handleExportReaders" prefHeight="35.0" prefWidth="50.0" styleClass="buttonBlue">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="UPLOAD" size="20px" text="" />
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

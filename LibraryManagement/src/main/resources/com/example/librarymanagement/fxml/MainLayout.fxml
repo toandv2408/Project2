@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="borderPane" prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement.controllers.MainController">
+    <stylesheets>
+        <URL value="@css/style.css" /> <!-- Thay đổi đường dẫn nếu cần -->
+    </stylesheets>
+
+    <!-- Sidebar (Left) -->
+    <left>
+        <VBox fx:id="sidebar" prefHeight="700.0" prefWidth="180.0" style="-fx-background-color: #0EA6E6;">
+            <Pane prefHeight="80.0" prefWidth="200.0" style="-fx-border-color: #00CDFF; -fx-border-width: 0px 0px 1px 0px;">
+                <children>
+                    <ImageView fx:id="profileImageView" fitHeight="48.0" fitWidth="48.0" layoutX="10.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" />
+                    <Label fx:id="usernameLabel" layoutX="72.0" layoutY="26.0" prefHeight="16.0" prefWidth="106.0" textFill="WHITE">
+                        <font>
+                            <Font size="14.0" />
+                        </font></Label>
+                    <HBox fx:id="userInfoPane" layoutX="75.0" layoutY="48.0" spacing="5.0">
+                        <Circle fill="#2bff2b" radius="5.0">
+                            <HBox.margin>
+                                <Insets top="2.0" />
+                            </HBox.margin></Circle>
+                        <Label text="Online" textFill="WHITE" />
+                    </HBox>
+                </children>
+                <VBox.margin>
+                    <Insets bottom="20.0" />
+                </VBox.margin>
+            </Pane>
+            <Button fx:id="dashBoardButton" prefHeight="40.0" prefWidth="200.0" styleClass="sidebar-button" text=" Dashboard">
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="TACHOMETER" />
+                </graphic>
+            </Button>
+            <Button fx:id="booksButton" prefHeight="40.0" prefWidth="200.0" styleClass="sidebar-button" text=" Books">
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="BOOK" />
+                </graphic>
+            </Button>
+            <Button fx:id="readerButton" prefHeight="40.0" prefWidth="200.0" styleClass="sidebar-button" text=" Readers">
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="USER" />
+                </graphic>
+            </Button>
+            <Button fx:id="borrowCardButton" prefHeight="40.0" prefWidth="200.0" styleClass="sidebar-button" text=" Borrow Card">
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="CREDIT_CARD" />
+                </graphic>
+            </Button>
+            <Button fx:id="borrowBookButton" prefHeight="40.0" prefWidth="200.0" styleClass="sidebar-button" text=" Borrow Book">
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="BOOK" />
+                </graphic>
+            </Button>
+            <Button fx:id="returnBookButton" prefHeight="40.0" prefWidth="200.0" styleClass="sidebar-button" text=" Return Book">
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="BOOK" />
+                </graphic>
+            </Button>
+            <Button fx:id="invoiceButton" prefHeight="40.0" prefWidth="200.0" styleClass="sidebar-button" text=" Invoice">
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="FILE" />
+                </graphic>
+            </Button>
+            <Button fx:id="accountButton" prefHeight="40.0" prefWidth="200.0" styleClass="sidebar-button" text=" Accounts">
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="USER_PLUS" />
+                </graphic>
+            </Button>
+            <Button fx:id="profileButton" prefHeight="40.0" prefWidth="200.0" styleClass="sidebar-button" text=" Profile">
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="USER" />
+                </graphic>
+            </Button>
+            <Button fx:id="logoutButton" prefHeight="40.0" prefWidth="200.0" styleClass="sidebar-button" text=" Logout">
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" />
+                </graphic>
+            </Button>
+        </VBox>
+    </left>
+
+    <!-- Navbar -->
+    <top>
+        <ToolBar fx:id="navbar" prefHeight="35.0" prefWidth="1300.0" style="-fx-background-color: #2499FF; -fx-border-width: 0px 0px 1px 0px; -fx-border-color: #00CDFF;">
+            <Button fx:id="menuButton" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="47.0" styleClass="menu-button">
+                <font>
+                    <Font size="22.0" />
+                </font>
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="BARS" size="15px" />
+                </graphic>
+            </Button>
+            <Label alignment="CENTER_RIGHT" cache="true" prefHeight="35.0" prefWidth="762.0" style="-fx-font-size: 20; -fx-text-fill: white; -fx-padding: 0 0 0 10;" text="Library Management System">
+                <graphic>
+                    <FontAwesomeIcon fill="WHITE" glyphName="BOOK" size="25px" />
+                </graphic>
+            </Label>
+        </ToolBar>
+    </top>
+
+    <center>
+        <Label fx:id="mainContent" style="-fx-font-size: 24; -fx-padding: 20;" text="Welcome to the Library Management System!" />
+    </center>
+</BorderPane>

@@ -1,0 +1,122 @@
+.text-field,
+.password-field {
+    -fx-border-color: transparent; /* Ẩn viền */
+    -fx-background-color: transparent; /* Ẩn nền */
+}
+
+.menu-button {
+    -fx-background-color: #75D6FF; /* Màu nền mặc định */
+    -fx-text-fill: #000000; /* Màu chữ mặc định */
+}
+
+.menu-button:hover {
+    -fx-background-color: #6cbeff; /* Màu nền khi hover */
+}
+
+/* style.css */
+
+.sidebar-button {
+    -fx-background-color: transparent; /* Nền trong suốt ban đầu */
+    -fx-text-fill: white; /* Màu chữ trắng */
+    -fx-font-size: 14px; /* Kích thước chữ */
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0px 20px;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Nền sáng khi hover */
+    -fx-cursor: hand; /* Con trỏ tay khi hover */
+}
+
+.sidebar-button:pressed{
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Nền sáng khi hover */
+}
+
+.sidebar-button.active{
+    -fx-background-color: rgba(250, 250, 250, 0.3); /* Nền sáng khi hover */
+}
+.changeImageButton{
+    -fx-background-color: #0ea6e6;
+}
+.changeImageButton:hover{
+    -fx-background-color: rgb(119, 181, 255);
+}
+.buttonChangePassword{
+    -fx-background-color: #0ea6e6;
+}
+.buttonChangePassword:hover{
+    -fx-background-color: rgb(119, 181, 255);
+}
+#updateButton{
+    -fx-background-color: #0ea6e6;
+}
+#updateButton:hover{
+    -fx-background-color: rgb(119, 181, 255);
+}
+
+#userImage {
+    -fx-border-color: gray;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-opacity: 0.6; /* Để hình ảnh nhạt đi một chút, tạo cảm giác rõ ràng cho chữ "Upload Image" */
+    -fx-cursor: hand; /* Đổi con trỏ chuột khi di chuột vào hình ảnh */
+}
+
+#uploadLabel {
+    -fx-text-fill: gray; /* Màu chữ */
+    -fx-font-size: 14px; /* Kích thước chữ */
+    -fx-alignment: CENTER; /* Căn giữa chữ */
+}
+
+/* Đặt màu cho các cột tiêu đề */
+
+/* Đặt kiểu cho các hàng trong bảng */
+/* Đặt kiểu cho hàng khi hover */
+.table-view .table-row-cell:hover {
+    -fx-background-color: #12c0f6; /* Màu nền khi hover */
+}
+
+.table-view .column-header {
+    -fx-background-color: #0EA6E6; /* Màu nền cho tiêu đề cột */
+    -fx-border-color: #939393;
+    -fx-border-width: 0 1 0 0;
+}
+.buttonBlue{
+    -fx-background-color: #2499FF;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #ffffff;
+}
+.buttonBlue:hover{
+    -fx-background-color: #0068c2; /* Màu nền cho tiêu đề cột */
+}
+
+.buttonGreen{
+    -fx-background-color: #08F000;
+    -fx-background-radius: 5px;
+    -fx-text-fill: white;
+}
+.buttonGreen:hover{
+    -fx-background-color: #0ac500;
+}
+.buttonOrange{
+    -fx-background-color: orange;
+    -fx-background-radius: 5px;
+    -fx-text-fill: white;
+}
+.buttonOrange:hover{
+    -fx-background-color: #a86d00;
+
+}
+.buttonRed{
+    -fx-background-color: red;
+    -fx-background-radius: 5px;
+    -fx-text-fill: white;
+}
+.buttonRed:hover{
+    -fx-background-color: #af0000;
+
+}
+/* Đặt kiểu cho các ô chứa dữ liệu */
+
+/* Bạn có thể thêm các quy tắc khác ở đây */

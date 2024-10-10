@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement.controllers.ProfileController">
+   <stylesheets>
+      <URL value="@css/style.css" /> <!-- Thay đổi đường dẫn nếu cần -->
+   </stylesheets>
+   <top>
+      <Label alignment="CENTER" prefHeight="94.0" prefWidth="344.0" text="Profile Information" textFill="#0ea6e6" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <Pane prefHeight="556.0" prefWidth="390.0" style="-fx-border-width: 0px 1px; -fx-border-color: gray;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox layoutX="61.0" layoutY="45.0" prefHeight="30.0" prefWidth="339.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="150.0" text="FullName:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fullNameField" editable="false" prefHeight="30.0" prefWidth="227.0" style="-fx-border-color: gray; -fx-border-radius: 5px;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="61.0" layoutY="94.0" prefHeight="30.0" prefWidth="339.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="152.0" text="Username:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameField" editable="false" prefHeight="30.0" prefWidth="231.0" style="-fx-border-radius: 5px; -fx-border-color: gray;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="61.0" layoutY="142.0" prefHeight="20.0" prefWidth="339.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="140.0" text="Date of Birth:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="dobField" editable="false" prefHeight="31.0" prefWidth="220.0" style="-fx-border-radius: 5px; -fx-border-color: gray;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="61.0" layoutY="190.0" prefHeight="15.0" prefWidth="339.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="140.0" text="Email:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="emailField" editable="false" prefHeight="19.0" prefWidth="220.0" style="-fx-border-radius: 5px; -fx-border-color: gray;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="61.0" layoutY="237.0" prefHeight="20.0" prefWidth="339.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="140.0" text="Phone Number:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="phoneNumberField" editable="false" prefHeight="19.0" prefWidth="220.0" style="-fx-border-color: gray; -fx-border-radius: 5px;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="61.0" layoutY="284.0" prefHeight="20.0" prefWidth="339.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="140.0" text="Address:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                   <TextField fx:id="addressField" editable="false" prefHeight="19.0" prefWidth="220.0" style="-fx-border-color: gray; -fx-border-radius: 5px;">
+                       <font>
+                           <Font size="14.0" />
+                       </font>
+                   </TextField>
+               </children>
+            </HBox>
+            <Button fx:id="updateButton" alignment="CENTER" layoutX="158.0" layoutY="353.0" mnemonicParsing="false" onAction="#handleUpdateAction" prefHeight="34.0" prefWidth="98.0" style="-fx-background-radius: 5px;" text="Update" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Label alignment="CENTER" layoutX="179.0" layoutY="1.0" prefHeight="17.0" prefWidth="56.0" text="Profile" textFill="#0ea6e6">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </center>
+   <left>
+      <Pane prefHeight="556.0" prefWidth="260.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="profileImageView" fitHeight="200.0" fitWidth="200.0" layoutX="30.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="fullName" alignment="CENTER" layoutX="52.0" layoutY="264.0" prefHeight="28.0" prefWidth="157.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="102.0" layoutY="1.0" prefHeight="17.0" prefWidth="56.0" text="Avatar" textFill="#0ea6e6">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <Button fx:id="changeImageButton" alignment="CENTER" layoutX="45.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleChangeImageAction" prefHeight="34.0" prefWidth="160.0" style="-fx-background-radius: 5px;" styleClass="changeImageButton" text="Change Image" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="saveButton" alignment="CENTER" layoutX="45.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleSaveAction" prefHeight="34.0" prefWidth="160.0" style="-fx-background-radius: 5px;" styleClass="changeImageButton" text="Save" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </left>
+   <right>
+      <Pane prefHeight="556.0" prefWidth="298.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="80.0" layoutY="1.0" prefHeight="26.0" prefWidth="146.0" text="Change Password" textFill="#0ea6e6">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="currentPasswordField" layoutX="50.0" layoutY="43.0" prefHeight="30.0" prefWidth="206.0" promptText="Current Password" style="-fx-border-width: 1px; -fx-border-color: gray; -fx-border-radius: 5px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </PasswordField>
+            <PasswordField fx:id="newPasswordField" layoutX="50.0" layoutY="96.0" prefHeight="30.0" prefWidth="206.0" promptText="New Password" style="-fx-border-radius: 5px; -fx-border-width: 1px; -fx-border-color: gray;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </PasswordField>
+            <PasswordField fx:id="confirmPasswordField" layoutX="50.0" layoutY="145.0" prefHeight="30.0" prefWidth="206.0" promptText="Confirm Password" style="-fx-border-radius: 5px; -fx-border-color: gray; -fx-border-width: 1px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </PasswordField>
+            <Button fx:id="saveChangePassword" alignment="CENTER" layoutX="100.0" layoutY="205.0" mnemonicParsing="false" onAction="#handleChangePasswordAction" prefHeight="34.0" prefWidth="98.0" style="-fx-background-radius: 5px;" styleClass="buttonChangePassword" text="Save" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </right>
+   <bottom>
+      <VBox fx:id="notificationBox" prefHeight="42.0" prefWidth="500.0" style="-fx-padding: 0 10 0 10;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="notificationLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="46.0" prefWidth="979.0" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>

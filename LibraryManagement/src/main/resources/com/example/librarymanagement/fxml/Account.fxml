@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement.controllers.AccountController">
+   <stylesheets>
+      <URL value="@css/style.css" /> <!-- Thay đổi đường dẫn nếu cần -->
+   </stylesheets>
+   <TableView fx:id="accountsTable" layoutX="24.0" layoutY="126.0" prefHeight="510.0" prefWidth="770.0">
+     <columns>
+       <TableColumn fx:id="idColumn" text="ID" visible="false">
+        <cellValueFactory>
+           <PropertyValueFactory property="id" />
+        </cellValueFactory>
+     </TableColumn>
+       <TableColumn fx:id="fullNameColumn" prefWidth="99.19997787475586" text="Full Name" />
+       <TableColumn fx:id="usernameColumn" minWidth="0.0" prefWidth="101.5999755859375" text="Username" />
+         <TableColumn fx:id="dobColumn" prefWidth="98.40003967285156" text="Date of Birth" />
+         <TableColumn fx:id="emailColumn" prefWidth="163.20001220703125" text="Email" />
+         <TableColumn fx:id="phoneNumberColumn" prefWidth="115.199951171875" text="Phone Number" />
+         <TableColumn fx:id="addressColumn" prefWidth="192.0" text="Address" />
+     </columns>
+   </TableView>
+   <Label layoutX="24.0" layoutY="22.0" prefHeight="30.0" prefWidth="95.0" text="Accounts" textFill="#2499ff">
+      <font>
+         <Font name="System Bold" size="20.0" />
+      </font>
+   </Label>
+   <TextField fx:id="searchField" layoutX="24.0" layoutY="74.0" prefHeight="35.0" prefWidth="250.0" promptText="Search" style="-fx-padding: 0 0 0 34; -fx-border-width: 1px; -fx-border-color: gray; -fx-border-radius: 5px;">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </TextField>
+   <FontAwesomeIcon fill="#2499ff" glyphName="SEARCH" layoutX="31.0" layoutY="98.0" size="20px" />
+   <Pane layoutX="819.0" layoutY="126.0" prefHeight="510.0" prefWidth="275.0" style="-fx-border-color: gray; -fx-border-radius: 5px;">
+      <children>
+         <Button alignment="CENTER" layoutX="108.0" layoutY="466.0" mnemonicParsing="false" onAction="#addAccount" prefHeight="30.0" prefWidth="60.0" styleClass="buttonBlue">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+            <graphic>
+               <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="15" />
+            </graphic>
+         </Button>
+         <ImageView fx:id="userImage" fitHeight="132.0" fitWidth="140.0" layoutX="71.0" onMouseClicked="#handleImageUpload" pickOnBounds="true" preserveRatio="true">
+            <style>
+               -fx-border-color: gray;
+               -fx-border-width: 1px;
+               -fx-background-color: white;
+               -fx-background-radius: 5px;
+            </style>
+         </ImageView>
+         <Label fx:id="uploadLabel" layoutX="97.0" layoutY="56.0" style="-fx-text-fill: gray; -fx-font-size: 14px; -fx-alignment: CENTER;" text="Upload Image">
+            <font>
+               <Font name="System Bold Italic" size="12.0" />
+            </font></Label>
+         <TextField fx:id="idField" managed="false" visible="false" />
+         <TextField fx:id="fullNameField" layoutX="18.0" layoutY="147.0" prefHeight="30.0" prefWidth="240.0" promptText="Full Name" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="usernameField" layoutX="18.0" layoutY="188.0" prefHeight="30.0" prefWidth="240.0" promptText="Username" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="dobField" layoutX="18.0" layoutY="228.0" prefHeight="30.0" prefWidth="240.0" promptText="Date of Birth" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="emailField" layoutX="18.0" layoutY="267.0" prefHeight="30.0" prefWidth="240.0" promptText="Email" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="phoneNumberField" layoutX="18.0" layoutY="306.0" prefHeight="30.0" prefWidth="240.0" promptText="Phone Number" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="addressField" layoutX="18.0" layoutY="346.0" prefHeight="30.0" prefWidth="240.0" promptText="Address" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <TextField fx:id="passwordField" layoutX="18.0" layoutY="386.0" prefHeight="30.0" prefWidth="240.0" promptText="Password" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </TextField>
+         <Button alignment="CENTER" layoutX="198.0" layoutY="466.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="30.0" prefWidth="60.0" styleClass="buttonRed">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+            <graphic>
+               <FontAwesomeIcon fill="WHITE" glyphName="TRASH" size="15" />
+            </graphic>
+         </Button>
+         <Button alignment="CENTER" layoutX="18.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="60.0" styleClass="buttonGreen">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+            <graphic>
+               <FontAwesomeIcon fill="WHITE" glyphName="REFRESH" size="15" />
+            </graphic>
+         </Button>
+      </children>
+   </Pane>
+
+   <VBox fx:id="notificationBox" layoutX="19.0" layoutY="606.0" prefHeight="42.0" prefWidth="1081.0" style="-fx-padding: 0 10 0 10; -fx-background-radius: 5px; -fx-border-radius: 5px;">
+      <children>
+         <Label fx:id="notificationLabel" alignment="CENTER" prefHeight="42.0" prefWidth="1102.0">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+      </children>
+   </VBox>
+</AnchorPane>

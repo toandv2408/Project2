@@ -128,6 +128,12 @@ public class MainController {
             if ("Profile.fxml".equals(fxmlFile)) {
                 ProfileController profileController = loader.getController();
                 profileController.loadProfile(currentAccountId); // Gọi phương thức để tải thông tin tài khoản
+            }else if ("BorrowCard.fxml".equals(fxmlFile)) {
+                BorrowCardController borrowCardController = loader.getController();
+                borrowCardController.setMainController(this); // Thiết lập MainController cho ReaderController
+                if (notificationMessage != null && notificationColor != null) {
+                    borrowCardController.showNotification(notificationMessage, notificationColor);
+                }
             } else if ("Reader.fxml".equals(fxmlFile)) {
                 ReaderController readerController = loader.getController();
                 readerController.setMainController(this); // Thiết lập MainController cho ReaderController

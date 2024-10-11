@@ -13,7 +13,7 @@
       <URL value="@css/style.css" />
    </stylesheets>
    <children>
-      <TableView fx:id="readerTable" layoutX="22.0" layoutY="112.0" prefHeight="520.0" prefWidth="810.0">
+      <TableView fx:id="readerTable" layoutX="22.0" layoutY="112.0" prefHeight="469.0" prefWidth="810.0">
          <columns>
             <TableColumn fx:id="idColumn" text="ID" visible="false">
                <cellValueFactory>
@@ -31,6 +31,7 @@
             <TableColumn fx:id="expiryDateColumn" prefWidth="81.60001220703123" text="Expiry Date" />
          </columns>
       </TableView>
+      <Pagination fx:id="pagination" layoutX="22.0" layoutY="585.0" prefHeight="42.0" prefWidth="778.0" />
       <Label layoutX="22.0" layoutY="22.0" prefHeight="30.0" prefWidth="98.0" text="Readers" textFill="#2499ff">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -126,7 +127,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="79.0" layoutY="-1.0" prefHeight="30.0" prefWidth="109.0" text="Reader Form" textFill="#2499ff">
+            <Label alignment="CENTER" layoutX="79.0" layoutY="3.0" prefHeight="30.0" prefWidth="109.0" text="Reader Form" textFill="#2499ff">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>

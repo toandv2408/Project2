@@ -30,6 +30,9 @@ public class InvoiceController {
 
     @FXML
     private ImageView QRCode;
+    private static final int ROWS_PER_PAGE = 18;
+    @FXML
+    private Pagination pagination;
     @FXML
     private TextField idField;
 
@@ -79,6 +82,7 @@ public class InvoiceController {
     @FXML
     public void initialize() {
         loadInvoiceData();
+        setupPagination();
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filterInvoices(newValue); // Gọi phương thức lọc khi có sự thay đổi
         });
@@ -107,6 +111,26 @@ public class InvoiceController {
         });
     }
 
+    private void setupPagination() {
+        int totalPageCount = (int) Math.ceil((double) invoiceList.size() / ROWS_PER_PAGE);
+        pagination.setPageCount(totalPageCount);
+
+        pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
+            updateTableView(newValue.intValue()); // Cập nhật dữ liệu cho TableView khi thay đổi trang
+        });
+
+        // Hiển thị dữ liệu trang đầu tiên
+        updateTableView(0);
+    }
+
+    // Cập nhật dữ liệu cho TableView dựa trên trang hiện tại
+    private void updateTableView(int pageIndex) {
+        int fromIndex = pageIndex * ROWS_PER_PAGE;
+        int toIndex = Math.min(fromIndex + ROWS_PER_PAGE, invoiceList.size());
+
+        invoiceTable.setItems(FXCollections.observableArrayList(invoiceList.subList(fromIndex, toIndex)));
+    }
+
     private void filterInvoices(String keyword) {
         ObservableList<Invoice> filteredList = FXCollections.observableArrayList();
 
@@ -125,7 +149,7 @@ public class InvoiceController {
 
     private void loadInvoiceData() {
         List<Invoice> invoices = invoiceDAO.getPayments();
-        invoices.sort((i1, i2) -> i2.getPaymentDate().compareTo(i1.getPaymentDate()));
+        invoices.sort((i1, i2) -> i2.getInvoiceCode().compareTo(i1.getInvoiceCode()));
         invoiceList.setAll(invoices);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("paymentId"));
         invoiceCodeColumn.setCellValueFactory(new PropertyValueFactory<>("invoiceCode"));
@@ -136,6 +160,7 @@ public class InvoiceController {
         realatedCodeColumn.setCellValueFactory(new PropertyValueFactory<>("relatedCode")); // Thiết lập relatedCode
         relatedNameColumn.setCellValueFactory(new PropertyValueFactory<>("relatedCodeOwnerName")); // Thiết lập relatedCodeOwnerName
         invoiceTable.setItems(invoiceList);
+        setupPagination();
     }
 
     private void updateInvoiceDetails(Invoice selectedInvoice) {
@@ -197,23 +222,38 @@ public class InvoiceController {
         // Lấy hóa đơn đã chọn từ bảng
         Invoice selectedInvoice = invoiceTable.getSelectionModel().getSelectedItem();
         if (selectedInvoice != null) {
+            // Kiểm tra trạng thái của hóa đơn
+            if ("paid".equalsIgnoreCase(selectedInvoice.getStatus())) {
+                // Thông báo hóa đơn đã được thanh toán
+                showNotification("This invoice has already been paid!", "#FF9224"); // Màu cam
+                return; // Dừng lại, không tiếp tục thanh toán
+            }else if ("refunded".equalsIgnoreCase(selectedInvoice.getStatus())) {
+                // Thông báo hóa đơn đã được hoàn trả và không thể thanh toán
+                showNotification("This invoice has been returned and cannot be paid!", "#FF9224"); // Màu cam
+                return; // Dừng lại, không tiếp tục thanh toán
+            }
+
             String newStatus = "paid"; // Trạng thái mới
             Timestamp paymentDate = new Timestamp(System.currentTimeMillis()); // Ngày thanh toán hiện tại
 
             boolean updated = invoiceDAO.updateInvoiceStatus(selectedInvoice.getPaymentId(), newStatus, paymentDate);
             if (updated) {
                 loadInvoiceData();
+                setupPagination();
+                pagination.setCurrentPageIndex(pagination.getCurrentPageIndex()); // Chuyển về trang đầu tiên
+                updateTableView(pagination.getCurrentPageIndex());
                 updateInvoiceDetails(selectedInvoice);
                 // Thông báo thành công
                 showNotification("Pay successfully!", "#2ECC71"); // Màu xanh lá
             } else {
                 // Thông báo lỗi
-                showNotification("Pay fail!", "#FF9224"); // Màu xanh lá
+                showNotification("Pay fail!", "#FF9224"); // Màu cam
             }
         } else {
-            showNotification("Please choose a invoice to pay!", "#FF9224"); // Màu xanh lá
+            showNotification("Please choose an invoice to pay!", "#FF9224"); // Màu cam
         }
     }
+
 
     private void showNotification(String message, String color) {
         notificationLabel.setText(message);

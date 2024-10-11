@@ -70,7 +70,7 @@ public class BookDAO {
             pstmt.setInt(3, book.getPublishedYear());
             pstmt.setString(4, book.getGenreName());
             pstmt.setInt(5, book.getStock());
-            pstmt.setDouble(6, book.getPrice());
+            pstmt.setInt(6, book.getPrice());
             pstmt.setString(7, book.getBookCode());
 
             int affectedRows = pstmt.executeUpdate(); // Số lượng bản ghi bị ảnh hưởng

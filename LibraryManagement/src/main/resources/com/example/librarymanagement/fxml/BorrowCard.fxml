@@ -1,14 +1,179 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement.controllers.DashBoardController">
-    <Text layoutX="108.0" layoutY="92.0">borrow card work!</Text>
+<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement.controllers.BorrowCardController">
+   <stylesheets>
+      <URL value="@css/style.css" /> <!-- Thay đổi đường dẫn nếu cần -->
+   </stylesheets>
+   <children>
+      <TableView fx:id="borrowCardTable" layoutX="22.0" layoutY="112.0" prefHeight="474.0" prefWidth="810.0" stylesheets="@css/style.css">
+         <columns>
+            <TableColumn fx:id="idColumn" text="ID" visible="false">
+               <cellValueFactory>
+                  <PropertyValueFactory property="id" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="cardCodeColumn" prefWidth="69.60003280639648" text="Card Code" />
+            <TableColumn fx:id="fullNameColumn" minWidth="0.0" prefWidth="113.80000305175781" text="Full Name" />
+            <TableColumn fx:id="genderColumn" prefWidth="67.80001831054688" text="Gender" />
+            <TableColumn fx:id="dobColumn" prefWidth="88.60000610351562" text="Date of Birth" />
+            <TableColumn fx:id="emailColumn" prefWidth="140.20001220703125" text="Email" />
+            <TableColumn fx:id="phoneNumberColumn" prefWidth="92.5999755859375" text="Phone Number" />
+            <TableColumn fx:id="addressColumn" prefWidth="149.4000244140625" text="Address" />
+            <TableColumn fx:id="depositColumn" minWidth="5.4000244140625" prefWidth="89.60000000000002" text="Deposit" />
+         </columns>
+      </TableView>
+      <Pagination fx:id="pagination" layoutX="32.0" layoutY="595.0" prefHeight="42.0" prefWidth="778.0" />
+      <Label layoutX="22.0" layoutY="22.0" prefHeight="30.0" prefWidth="137.0" text="Borrow Cards" textFill="#2499ff">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Pane layoutX="860.0" layoutY="112.0" prefHeight="520.0" prefWidth="245.0" style="-fx-border-color: gray; -fx-border-radius: 5px;">
+         <children>
+            <Button alignment="CENTER" layoutX="74.0" layoutY="477.0" mnemonicParsing="false" onAction="#addBorrowCard" prefHeight="30.0" prefWidth="45.0" styleClass="buttonBlue">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="PLUS" size="15" />
+               </graphic>
+            </Button>
+            <TextField fx:id="idField" managed="false" visible="false" />
+            <TextField fx:id="fullNameField" layoutX="13.0" layoutY="77.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: Nguyen Van A" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="emailField" layoutX="13.0" layoutY="284.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: example@gmail.com" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="phoneNumberField" layoutX="13.0" layoutY="351.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: 0987654321" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="addressField" layoutX="14.0" layoutY="419.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: Ha Noi" style="-fx-border-color: gray; -fx-padding: 0 0 0 10; -fx-border-radius: 5px;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button alignment="CENTER" layoutX="187.0" layoutY="477.0" mnemonicParsing="false" onAction="#deleteBorrowCard" prefHeight="30.0" prefWidth="45.0" styleClass="buttonRed">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="TRASH" size="15" />
+               </graphic>
+            </Button>
+            <Button alignment="CENTER" layoutX="18.0" layoutY="477.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="45.0" styleClass="buttonGreen">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="REFRESH" size="15" text="" />
+               </graphic>
+            </Button>
+            <Button alignment="CENTER" layoutX="131.0" layoutY="477.0" mnemonicParsing="false" onAction="#updateBorrowCard" prefHeight="30.0" prefWidth="45.0" styleClass="buttonOrange">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon fill="WHITE" glyphName="EDIT" size="15" />
+               </graphic>
+            </Button>
+            <Label layoutX="18.0" layoutY="395.0" text="Address :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="326.0" text="Phone Number :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="259.0" text="Email :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="19.0" layoutY="191.0" text="Date of Birth :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="51.0" text="Full Name :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="54.0" layoutY="5.0" prefHeight="30.0" prefWidth="154.0" text="Borrow Card Form" textFill="#2499ff">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="125.0" text="Gender :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="dobField" layoutX="14.0" layoutY="216.0" prefHeight="30.0" prefWidth="220.0" promptText="Ex: mm/DD/yyyy" style="-fx-border-width: 1px; -fx-border-radius: 5px; -fx-border-color: gray;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </DatePicker>
+            <HBox layoutX="18.0" layoutY="152.0" prefHeight="30.0" prefWidth="209.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" text="Male">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="genderToggleGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="72.0" text="Female" toggleGroup="$genderToggleGroup" />
+                  <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Other" toggleGroup="$genderToggleGroup">
+                     <padding>
+                        <Insets left="4.0" />
+                     </padding>
+                  </RadioButton>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <TextField fx:id="searchField" layoutX="23.0" layoutY="66.0" prefHeight="35.0" prefWidth="250.0" promptText="Search" style="-fx-padding: 0 0 0 34; -fx-border-width: 1px; -fx-border-color: gray; -fx-border-radius: 5px;">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <FontAwesomeIcon fill="#2499ff" glyphName="SEARCH" layoutX="32.0" layoutY="90.0" size="20px" />
+      <VBox fx:id="notificationBox" layoutX="39.0" layoutY="616.0" prefHeight="42.0" prefWidth="1071.0" style="-fx-padding: 0 10 0 10; -fx-background-radius: 5px; -fx-border-radius: 5px;">
+         <children>
+            <Label fx:id="notificationLabel" alignment="CENTER" prefHeight="42.0" prefWidth="1122.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Button alignment="CENTER" layoutX="292.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleExportBorrwCards" prefHeight="35.0" prefWidth="50.0" styleClass="buttonBlue">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="WHITE" glyphName="UPLOAD" size="20px" text="" />
+         </graphic>
+      </Button>
+   </children>
 
 </AnchorPane>

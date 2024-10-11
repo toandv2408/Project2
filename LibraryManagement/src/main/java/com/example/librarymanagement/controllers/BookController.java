@@ -28,6 +28,10 @@ public class BookController {
     @FXML
     private TableView<Book> booksTable;
 
+    private static final int ROWS_PER_PAGE = 18;
+    @FXML
+    private Pagination pagination;
+
     @FXML
     private TableColumn<Book, Long> idColumn;
 
@@ -85,6 +89,7 @@ public class BookController {
     @FXML
     public void initialize() {
         loadBookData();
+        setupPagination();
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filterAccounts(newValue); // Gọi phương thức lọc khi có sự thay đổi
         });
@@ -113,6 +118,26 @@ public class BookController {
         });
     }
 
+    private void setupPagination() {
+        int totalPageCount = (int) Math.ceil((double) bookList.size() / ROWS_PER_PAGE);
+        pagination.setPageCount(totalPageCount);
+
+        pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
+            updateTableView(newValue.intValue()); // Cập nhật dữ liệu cho TableView khi thay đổi trang
+        });
+
+        // Hiển thị dữ liệu trang đầu tiên
+        updateTableView(0);
+    }
+
+    // Cập nhật dữ liệu cho TableView dựa trên trang hiện tại
+    private void updateTableView(int pageIndex) {
+        int fromIndex = pageIndex * ROWS_PER_PAGE;
+        int toIndex = Math.min(fromIndex + ROWS_PER_PAGE, bookList.size());
+
+        booksTable.setItems(FXCollections.observableArrayList(bookList.subList(fromIndex, toIndex)));
+    }
+
     // Phương thức để lấy dữ liệu sách từ DAO và hiển thị lên TableView
     private void loadBookData() {
         BookDAO bookDAO = new BookDAO();
@@ -133,6 +158,7 @@ public class BookController {
 
         // Đặt dữ liệu vào TableView
         booksTable.setItems(bookList);
+        setupPagination();
     }
 
     private void showBookDetails(Book book) {
@@ -215,13 +241,21 @@ public class BookController {
 
         // Attempt to add the book to the database
         if (bookDAO.addBook(book)) {
-            loadBookData();
+            // Add the new book to the top of the list
+            bookList.add(0, new Book(book.getId(), title, author, publishedYear, genreName, stock, price, newBookCode));
+
+            // Update the pagination and refresh the table
+            setupPagination();
+            pagination.setCurrentPageIndex(0); // Chuyển về trang đầu tiên
+            updateTableView(0);
+
             showNotification("Add book successfully!", "#2ECC71"); // Màu xanh lá
-            handleRefresh(); // Refresh the table view after adding
+            clearFields(); // Xóa trắng các ô nhập liệu
         } else {
             showNotification("Failed to add book to the database! Please try again.", "#E74C3C"); // Màu đỏ
         }
     }
+
 
     // Helper method to check if a string is a valid number
     private boolean isNumeric(String str) {
@@ -275,6 +309,7 @@ public class BookController {
             bookDAO.updateBook(updatedBook);
 
             bookList.setAll(bookDAO.getAllBooks());
+            updateTableView(pagination.getCurrentPageIndex());
             showNotification("Update book successfully!", "#2ECC71"); // Màu xanh lá
 
             clearFields();

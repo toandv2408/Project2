@@ -11,20 +11,20 @@
    <stylesheets>
       <URL value="@css/style.css" /> <!-- Thay đổi đường dẫn nếu cần -->
    </stylesheets>
-   <TableView fx:id="booksTable" layoutX="22.0" layoutY="112.0" prefHeight="520.0" prefWidth="778.0">
+   <TableView fx:id="booksTable" layoutX="22.0" layoutY="112.0" prefHeight="458.0" prefWidth="778.0">
       <columns>
          <TableColumn fx:id="idColumn" text="ID" visible="false">
             <cellValueFactory>
                <PropertyValueFactory property="id" />
             </cellValueFactory>
          </TableColumn>
-         <TableColumn fx:id="bookCodeColumn" prefWidth="65.60000801086426" text="Book Code" />
-         <TableColumn fx:id="titleColumn" minWidth="0.0" prefWidth="244.7999725341797" text="Title" />
+         <TableColumn fx:id="bookCodeColumn" prefWidth="72.39999771118164" text="Book Code" />
+         <TableColumn fx:id="titleColumn" minWidth="0.0" prefWidth="238.8000030517578" text="Title" />
          <TableColumn fx:id="authorColumn" prefWidth="121.60000610351562" text="Author" />
          <TableColumn fx:id="publishedYearColumn" prefWidth="81.60003662109375" text="Published Year" />
          <TableColumn fx:id="genreNameColumn" prefWidth="131.199951171875" text="Genre Name" />
          <TableColumn fx:id="stockColumn" prefWidth="40.79998779296875" text="Stock" />
-         <TableColumn fx:id="priceColumn" prefWidth="91.99993896484375" text="Price" />
+         <TableColumn fx:id="priceColumn" prefWidth="88.0" text="Price" />
       </columns>
    </TableView>
    <Label layoutX="22.0" layoutY="22.0" prefHeight="30.0" prefWidth="68.0" text="Books" textFill="#2499ff">
@@ -165,4 +165,5 @@
          <FontAwesomeIcon fill="WHITE" glyphName="UPLOAD" size="15" text="" />
       </graphic>
    </Button>
+   <Pagination fx:id="pagination" layoutX="22.0" layoutY="585.0" prefHeight="42.0" prefWidth="778.0" />
 </AnchorPane>

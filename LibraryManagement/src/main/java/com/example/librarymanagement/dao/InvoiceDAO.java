@@ -14,10 +14,12 @@ public class InvoiceDAO {
                 "CASE " +
                 "   WHEN pd.payment_type = 'reader_card' THEN r.reader_code " +
                 "   WHEN pd.payment_type = 'borrowing_card' THEN bc.borrowing_card_code " +
+                "   WHEN pd.payment_type = 'refund_deposit' THEN bc.borrowing_card_code " +
                 "END AS related_code, " +
                 "CASE " +
                 "   WHEN pd.payment_type = 'reader_card' THEN r.full_name " +
                 "   WHEN pd.payment_type = 'borrowing_card' THEN bc.full_name " +
+                "   WHEN pd.payment_type = 'refund_deposit' THEN bc.full_name " +
                 "END AS related_code_owner_name " +
                 "FROM payments p " +
                 "JOIN payment_details pd ON p.payment_id = pd.payment_id " +

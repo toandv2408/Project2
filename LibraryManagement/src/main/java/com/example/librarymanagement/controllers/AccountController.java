@@ -17,7 +17,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,7 +35,9 @@ import java.sql.SQLException;
 public class AccountController {
     @FXML
     private TableView<AccountResponse> accountsTable;
-
+    private static final int ROWS_PER_PAGE = 18;
+    @FXML
+    private Pagination pagination;
     @FXML
     private TableColumn<AccountResponse, Integer> idColumn;
     @FXML
@@ -77,6 +81,14 @@ public class AccountController {
     private TextField passwordField; // Trường nhập mật khẩu
     @FXML
     private ImageView userImage;
+    @FXML
+    private Pane imagePane; // Pane chứa ImageView và vùng chọn
+    @FXML
+    private ImageView croppedImagePreview; // Để hiển thị ảnh đã cắt
+
+    private Rectangle cropArea;
+    private double startX, startY; // Điểm bắt đầu kéo hình vuông
+    private Image originalImage;
     private byte[] avatar;
     private ObservableList<AccountResponse> accountsList;
     private AccountDAO accountDAO = new AccountDAO();
@@ -85,6 +97,7 @@ public class AccountController {
     public void initialize() {
         accountsList = FXCollections.observableArrayList();
         loadAccounts();
+        setupPagination();
 
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filterAccounts(newValue); // Gọi phương thức lọc khi có sự thay đổi
@@ -109,6 +122,25 @@ public class AccountController {
         });
     }
 
+    private void setupPagination() {
+        int totalPageCount = (int) Math.ceil((double) accountsList.size() / ROWS_PER_PAGE);
+        pagination.setPageCount(totalPageCount);
+
+        pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
+            updateTableView(newValue.intValue()); // Cập nhật dữ liệu cho TableView khi thay đổi trang
+        });
+
+        // Hiển thị dữ liệu trang đầu tiên
+        updateTableView(0);
+    }
+
+    // Cập nhật dữ liệu cho TableView dựa trên trang hiện tại
+    private void updateTableView(int pageIndex) {
+        int fromIndex = pageIndex * ROWS_PER_PAGE;
+        int toIndex = Math.min(fromIndex + ROWS_PER_PAGE, accountsList.size());
+
+        accountsTable.setItems(FXCollections.observableArrayList(accountsList.subList(fromIndex, toIndex)));
+    }
     private void loadAccounts() {
         // Lấy danh sách tài khoản từ DAO
         accountsList = FXCollections.observableArrayList(accountDAO.getAllAccounts());
@@ -124,6 +156,7 @@ public class AccountController {
 
         // Cập nhật TableView với danh sách tài khoản
         accountsTable.setItems(accountsList);
+        setupPagination();
     }
 
 
@@ -167,7 +200,7 @@ public class AccountController {
 
             // Gọi phương thức kiểm tra trùng lặp từ DAO
             if (accountDAO.isUsernameOrEmailTaken(accountRequest.getUsername(), accountRequest.getEmail(), accountRequest.getPhoneNumber())) {
-                showNotification("Username, Email or Phone Number already exists!", "#E67E22"); // Màu xanh lá
+                showNotification("Username, Email or Phone Number already exists!", "#E67E22"); // Màu cam
                 return;
             }
 
@@ -176,12 +209,29 @@ public class AccountController {
             if (success) {
                 showNotification("Add new account successfully!", "#2ECC71"); // Màu xanh lá
                 handleRefresh();
-                loadAccounts(); // Tải lại danh sách tài khoản
+
+                // Thêm tài khoản mới vào danh sách và đặt nó ở đầu danh sách
+                AccountResponse newAccount = new AccountResponse(); // Tạo đối tượng AccountResponse từ dữ liệu vừa thêm
+                newAccount.setId(newAccount.getId()); // Lấy ID của tài khoản mới nhất vừa thêm
+                newAccount.setFullName(accountRequest.getFullName());
+                newAccount.setUsername(accountRequest.getUsername());
+                newAccount.setDateOfBirth(accountRequest.getDateOfBirth());
+                newAccount.setEmail(accountRequest.getEmail());
+                newAccount.setPhoneNumber(accountRequest.getPhoneNumber());
+                newAccount.setAddress(accountRequest.getAddress());
+                // Thêm tài khoản mới vào đầu danh sách
+                accountsList.add(0, newAccount);
+
+                // Cập nhật lại TableView và đặt lại trang hiện tại về 0
+                setupPagination(); // Cập nhật số trang
+                pagination.setCurrentPageIndex(0); // Quay lại trang đầu tiên
+                updateTableView(0); // Cập nhật TableView để hiển thị tài khoản mới
             } else {
-                showNotification("Add new account failed!", "#E74C3C"); // Màu xanh lá
+                showNotification("Add new account failed!", "#E74C3C"); // Màu đỏ
             }
         }
     }
+
 
     @FXML
     private void handleRefresh() {

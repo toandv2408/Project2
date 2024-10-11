@@ -6,6 +6,7 @@ import com.example.librarymanagement.models.Book;
 import com.example.librarymanagement.models.Reader;
 import com.example.librarymanagement.request.BookRequest;
 import com.example.librarymanagement.request.ReaderRequest;
+import com.example.librarymanagement.respone.AccountResponse;
 import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,12 +31,12 @@ import java.time.Period;
 import java.util.List;
 
 public class ReaderController {
-    @FXML
-    private Button invoiceButton; // Nút để chuyển đến Invoice
-
     private MainController mainController;
     @FXML
     private TableView<Reader> readerTable;
+    private static final int ROWS_PER_PAGE = 18;
+    @FXML
+    private Pagination pagination;
     @FXML
     private TableColumn<Reader, Long> idColumn;
     @FXML
@@ -94,6 +95,7 @@ public class ReaderController {
     @FXML
     public void initialize() {
         loadReaderData();
+        setupPagination();
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filterReaders(newValue); // Gọi phương thức lọc khi có sự thay đổi
         });
@@ -104,9 +106,29 @@ public class ReaderController {
         });
     }
 
+    private void setupPagination() {
+        int totalPageCount = (int) Math.ceil((double) readerList.size() / ROWS_PER_PAGE);
+        pagination.setPageCount(totalPageCount);
+
+        pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
+            updateTableView(newValue.intValue()); // Cập nhật dữ liệu cho TableView khi thay đổi trang
+        });
+
+        // Hiển thị dữ liệu trang đầu tiên
+        updateTableView(0);
+    }
+
+    // Cập nhật dữ liệu cho TableView dựa trên trang hiện tại
+    private void updateTableView(int pageIndex) {
+        int fromIndex = pageIndex * ROWS_PER_PAGE;
+        int toIndex = Math.min(fromIndex + ROWS_PER_PAGE, readerList.size());
+
+        readerTable.setItems(FXCollections.observableArrayList(readerList.subList(fromIndex, toIndex)));
+    }
+
     private void loadReaderData() {
         List<Reader> reders = readerDAO.getAllReaders();
-
+        reders.sort((i1, i2) -> i2.getReaderCode().compareTo(i1.getReaderCode()));
         readerList.setAll(reders);
 
         // Đặt giá trị cho các cột
@@ -123,6 +145,8 @@ public class ReaderController {
 
         // Đặt dữ liệu vào TableView
         readerTable.setItems(readerList);
+        setupPagination();
+
     }
 
     private void populateFieldsFromSelectedReader(Reader selectedReader) {
@@ -159,7 +183,7 @@ public class ReaderController {
     public void exportReadersToCSV(List<Reader> readerList, String filePath) {
         try (FileWriter writer = new FileWriter(filePath)) {
             // Viết tiêu đề cho file CSV
-            writer.append("Reader,Full Name,Gender,Date of Birth,Email,Phone Number,Citizenship Card,Address\n");
+            writer.append("Reader Code,Full Name,Gender,Date of Birth,Email,Phone Number,Citizenship Card,Address\n");
 
             // Viết thông tin sách
             for (Reader reader : readerList) {
@@ -240,6 +264,7 @@ public class ReaderController {
         // Thêm độc giả vào cơ sở dữ liệu
         try {
             readerDAO.addReader(readerRequest);
+            mainController.loadPage("Reader.fxml", "Reader updated successfully!",  "#2ECC71");
             loadReaderData();
             showNotification("Add reader successfully!", "#2ECC71"); // Màu xanh lá
             if (dob != null && Period.between(dob, LocalDate.now()).getYears() > 18) {

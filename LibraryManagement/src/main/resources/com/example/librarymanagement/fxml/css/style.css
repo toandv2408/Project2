@@ -82,6 +82,18 @@
     -fx-border-color: #939393;
     -fx-border-width: 0 1 0 0;
 }
+
+.table-view .virtual-flow {
+    -fx-padding: 0; /* Xóa padding */
+}
+
+.table-view .scroll-bar:horizontal,
+.table-view .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+}
+
 .buttonBlue{
     -fx-background-color: #2499FF;
     -fx-background-radius: 5px;

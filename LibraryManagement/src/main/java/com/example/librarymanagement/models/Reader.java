@@ -9,7 +9,7 @@ import java.sql.Date;
 
 public class Reader {
 
-    private Integer readerId;
+    private Long readerId;
     private String fullName;
     private String email;
     private String phoneNumber;
@@ -25,7 +25,7 @@ public class Reader {
     public Reader() {
     }
 
-    public Reader(Integer readerId, String fullName, String email, String phoneNumber, String address, LocalDate dob, String gender, String citizenshipCard, String readerCode, LocalDate expiryDate) {
+    public Reader(Long readerId, String fullName, String email, String phoneNumber, String address, LocalDate dob, String gender, String citizenshipCard, String readerCode, LocalDate expiryDate) {
         this.readerId = readerId;
         this.fullName = fullName;
         this.email = email;
@@ -38,11 +38,11 @@ public class Reader {
         this.expiryDate = expiryDate;
     }
 
-    public Integer getReaderId() {
+    public Long getReaderId() {
         return readerId;
     }
 
-    public void setReaderId(Integer readerId) {
+    public void setReaderId(Long readerId) {
         this.readerId = readerId;
     }
 

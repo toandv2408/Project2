@@ -13,7 +13,7 @@
       <URL value="@css/style.css" />
    </stylesheets>
    <children>
-      <TableView fx:id="invoiceTable" layoutX="32.0" layoutY="122.0" prefHeight="520.0" prefWidth="759.0">
+      <TableView fx:id="invoiceTable" layoutX="32.0" layoutY="122.0" prefHeight="469.0" prefWidth="759.0">
          <columns>
             <TableColumn fx:id="idColumn" text="ID" visible="false">
                <cellValueFactory>
@@ -29,6 +29,7 @@
             <TableColumn fx:id="statusColumn" prefWidth="95.9999877929688" text="Status" />
          </columns>
       </TableView>
+      <Pagination fx:id="pagination" layoutX="21.0" layoutY="596.0" prefHeight="42.0" prefWidth="778.0" />
       <Label layoutX="32.0" layoutY="32.0" prefHeight="30.0" prefWidth="98.0" text="Invoices" textFill="#2499ff">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -48,14 +49,14 @@
          </graphic>
       </Button>
       <FontAwesomeIcon fill="#2499ff" glyphName="SEARCH" layoutX="40.0" layoutY="101.0" size="20px" />
-      <Pane layoutX="823.0" layoutY="122.0" prefHeight="520.0" prefWidth="262.0" style="-fx-border-color: gray; -fx-border-radius: 5px;">
+      <Pane layoutX="823.0" layoutY="122.0" prefHeight="464.0" prefWidth="262.0" style="-fx-border-color: gray; -fx-border-radius: 5px;">
          <children>
             <Label alignment="CENTER" layoutX="77.0" layoutY="-1.0" prefHeight="30.0" prefWidth="109.0" text="Payment" textFill="#2499ff">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" layoutX="66.0" layoutY="468.0" mnemonicParsing="false" onAction="#handlePayAction" prefHeight="35.0" prefWidth="131.0" styleClass="buttonBlue" text="Pay">
+            <Button alignment="CENTER" layoutX="66.0" layoutY="413.0" mnemonicParsing="false" onAction="#handlePayAction" prefHeight="35.0" prefWidth="131.0" styleClass="buttonBlue" text="Pay">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>

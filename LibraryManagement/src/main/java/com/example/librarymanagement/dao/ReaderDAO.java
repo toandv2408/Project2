@@ -20,7 +20,7 @@ public class ReaderDAO {
              ResultSet rs = stmt.executeQuery("SELECT reader_id, reader_code, full_name, email, phone_number, address, dob, gender, citizenship_card, expiry_date FROM readers WHERE status = 0")) {
 
             while (rs.next()) {
-                Integer id = rs.getInt("reader_id");
+                Long id = rs.getLong("reader_id");
                 String readerCode = rs.getString("reader_code");
                 String fullName = rs.getString("full_name");
                 String email = rs.getString("email");
@@ -195,7 +195,7 @@ public class ReaderDAO {
         return currentDate.getYear() - dob.getYear(); // Calculate age based on year difference
     }
 
-    public void deleteReader(Integer readerId) {
+    public void deleteReader(Long readerId) {
         String sql = "UPDATE readers SET status = 1 WHERE reader_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();

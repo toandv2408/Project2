@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 public class BorrowBook {
     private Long id;
+    private Long borrowCardId;
+    private Book book;
     private String cardCode;
     private String fullName; // Tên đầy đủ của độc giả
     private String bookCode; // Mã sách
@@ -12,6 +14,9 @@ public class BorrowBook {
     private LocalDate returnDate; // Ngày trả thực tế
     private int quantity; // Số lượng mượn
     private String status; // Trạng thái (Đang mượn, Đã trả, Quá hạn, ...)
+
+    public BorrowBook() {
+    }
 
     // Constructor
     public BorrowBook(Long id, String cardCode, String fullName, String bookCode,
@@ -35,6 +40,22 @@ public class BorrowBook {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getBorrowCardId() {
+        return borrowCardId;
+    }
+
+    public void setBorrowCardId(Long borrowCardId) {
+        this.borrowCardId = borrowCardId;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public String getCardCode() {

@@ -15,6 +15,11 @@ public class BorrowCard {
 
     public BorrowCard() {
     }
+    public BorrowCard(String fullName, Long borrowCardId) {
+        this.fullName = fullName;
+        this.borrowCardId = borrowCardId;
+    }
+
 
     public BorrowCard(Long borrowCardId, String fullName, String email, String phoneNumber, String address, LocalDate dob, String gender, String cardCode, Integer deposit) {
         this.borrowCardId = borrowCardId;
@@ -27,6 +32,7 @@ public class BorrowCard {
         this.cardCode = cardCode;
         this.deposit = deposit;
     }
+
 
     public Long getBorrowCardId() {
         return borrowCardId;

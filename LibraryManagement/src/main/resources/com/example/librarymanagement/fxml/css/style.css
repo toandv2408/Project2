@@ -129,6 +129,16 @@
     -fx-background-color: #af0000;
 
 }
+
+.buttonGray{
+    -fx-background-color: #C4C3C3;
+    -fx-background-radius: 5px;
+    -fx-text-fill: white;
+}
+
+.buttonGray:hover{
+    -fx-background-color: #8a8888;
+}
 /* Đặt kiểu cho các ô chứa dữ liệu */
 
 /* Bạn có thể thêm các quy tắc khác ở đây */
